@@ -1,0 +1,6 @@
+terraform.tfstate*
+.terraform*
+.DS_Store
+terraform.tfvars
+main.tf
+main.tf.json
