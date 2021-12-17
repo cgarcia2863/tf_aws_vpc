@@ -23,7 +23,7 @@ resource "aws_subnet" "public" {
   cidr_block              = slice(local.subnets, 0, length(data.aws_availability_zones.available.names))[index(tolist(data.aws_availability_zones.available.names), each.value)]
   map_public_ip_on_launch = true
   tags = merge(
-    { Name = format("%s_%s", var.aws_vpc_name, "public") },
+    { Name = format("%s-%s-%s", var.aws_vpc_name, "public", each.value) },
     var.aws_vpc_tags
   )
 }
@@ -34,7 +34,7 @@ resource "aws_subnet" "private" {
   availability_zone = each.value
   cidr_block        = slice(local.subnets, ceil((length(data.aws_availability_zones.available.names) / 2) + 1), length(data.aws_availability_zones.available.names) * 2)[index(tolist(data.aws_availability_zones.available.names), each.value)]
   tags = merge(
-    { Name = format("%s_%s", var.aws_vpc_name, "private") },
+    { Name = format("%s-%s-%s", var.aws_vpc_name, "private", each.value) },
     var.aws_vpc_tags
   )
 }
