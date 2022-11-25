@@ -26,3 +26,13 @@ variable "aws_route_table_additional_routes" {
   type    = list(map(any))
   default = []
 }
+
+variable "aws_route_table_additional_ngw_routes" {
+  type    = list(map(any))
+  default = []
+}
+
+variable "aws_nat_gateway_deploy" {
+  type    = bool
+  default = false
+}
